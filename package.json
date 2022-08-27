@@ -21,7 +21,9 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "@headlessui/vue": "^1.6.7",
         "daisyui": "^2.24.0",
-        "flowbite": "^1.5.2"
+        "flowbite": "^1.5.2",
+        "resize-textarea-vue3": "^1.1.1"
     }
 }

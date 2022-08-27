@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 use Inertia\Middleware;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,7 +40,35 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            //
+
+            'appName' => config('app.name'),
+
+            'auth.user' => fn () => $request->user()
+                ? $request->user()->only('id', 'name')
+                : null,
+
+            'flash' => [
+                'message' => fn () => $request->session()->get('message')
+            ],
+
+            'categories' => fn () => Category::latest()
+                ->get()
+                ->map(fn ($category) => [
+                    'id'    =>  $category->id,
+                    'name'  =>  $category->name,
+                    'slug'  =>  $category->slug
+                ]),
+
+            'posts'  => fn () => [
+                'posts' =>  PostResource::collection(Post::query()->with('user', 'category')->latest()
+                    ->when($request->input('search'), function ($query, $search) {
+                        $query->where('description', 'like', "%{$search}%");
+                    })
+                    ->paginate(25)
+                    ->withQueryString()),
+                'filters' => $request->only(['search'])
+            ]
+
         ]);
     }
 }
