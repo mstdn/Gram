@@ -42,6 +42,9 @@
                                         <img class="rounded-2xl object-fill h-full w-full" :src="post.file" alt="" />
                                     </InertiaLink>
                                 </div>
+                                <div class="mt-2">
+                                    <p>{{ post.description }}</p>
+                                </div>
 
                             </DialogPanel>
                         </TransitionChild>

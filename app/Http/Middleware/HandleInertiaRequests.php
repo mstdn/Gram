@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
             'appName' => config('app.name'),
 
             'auth.user' => fn () => $request->user()
-                ? $request->user()->only('id', 'name')
+                ? $request->user()->only('id', 'name', 'username')
                 : null,
 
             'flash' => [
@@ -59,7 +59,9 @@ class HandleInertiaRequests extends Middleware
                     'slug'  =>  $category->slug
                 ]),
 
-            'posts'  => fn () => [
+            'filters' => $request->only(['search']),
+
+            /* 'posts'  => fn () => [
                 'posts' =>  PostResource::collection(Post::query()->with('user', 'category')->latest()
                     ->when($request->input('search'), function ($query, $search) {
                         $query->where('description', 'like', "%{$search}%");
@@ -67,7 +69,7 @@ class HandleInertiaRequests extends Middleware
                     ->paginate(25)
                     ->withQueryString()),
                 'filters' => $request->only(['search'])
-            ]
+            ] */
 
         ]);
     }

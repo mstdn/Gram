@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import JetBanner from '@/Components/Banner.vue';
 import Search from '../Pages/Components/Search.vue';
 import Compose from '../Pages/Components/Compose.vue';
+import PublicSearch from '../Pages/Components/PublicSearch.vue';
 
 defineProps({
     title: String,
@@ -22,8 +23,7 @@ const logout = () => {
         <JetBanner />
 
         <div class="min-h-screen bg-white dark:bg-gray-900">
-            <div v-if="$page.props.auth.user === null"
-                class="sticky top-0 z-50 navbar bg-gray-100 dark:bg-gray-900 shadow-sm">
+            <div v-if="$page.props.auth.user === null" class="sticky top-0 navbar bg-white dark:bg-gray-900 shadow-sm">
                 <div class="navbar-start ">
                     <div class="dropdown">
                         <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -36,41 +36,65 @@ const logout = () => {
                         <ul tabindex="0"
                             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <IntertiaLink href="/">Home</IntertiaLink>
+                                <Link href="/">Home</Link>
                             </li>
                             <li>
-                                <IntertiaLink href="/login">Login</IntertiaLink>
+                                <Link href="/login">Login</Link>
                             </li>
                             <li>
-                                <IntertiaLink href="/register">Register</IntertiaLink>
+                                <Link href="/register">Register</Link>
                             </li>
                         </ul>
                     </div>
                     <InertiaLink href="/" class="btn btn-ghost normal-case text-xl text-primary">
-                        {{ $page.props.appName }}
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-700">
+                            {{ $page.props.appName }}
+                        </span>
                     </InertiaLink>
-                </div>
-                <div class="navbar-center hidden lg:flex">
-                    <ul class="menu menu-horizontal p-0">
+
+                    <ul class="menu menu-horizontal p-0 hidden lg:flex">
                         <li>
-                            <IntertiaLink href="/" class="text-gray-900 dark:text-white">Home</IntertiaLink>
+                            <Link :href="route('landing')"
+                                :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/' }"
+                                class="text-gray-900 dark:text-white">
+                            Home
+                            </Link>
                         </li>
                         <li>
-                            <IntertiaLink href="/" class="text-gray-900 dark:text-white">Explore</IntertiaLink>
+                            <Link :href="route('categories')"
+                                :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                                class="text-gray-900 dark:text-white">
+                            Explore
+                            </Link>
                         </li>
                     </ul>
                 </div>
+
+                <!--  <div class="navbar-center hidden lg:flex">
+                </div> -->
+
                 <div class="navbar-end">
+                    <PublicSearch :filters="$page.props.filters" />
+
+                    <InertiaLink href="/login" class="btn btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+                        </svg>
+                    </InertiaLink>
                     <InertiaLink href="/register" class="btn btn-ghost">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                            <circle cx="12" cy="10" r="3" />
-                            <circle cx="12" cy="12" r="10" />
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
                         </svg>
                     </InertiaLink>
                 </div>
             </div>
+
+
 
             <div v-if="$page.props.auth.user !== null" class="sticky top-0 navbar bg-white dark:bg-gray-900 shadow-sm">
                 <div class="navbar-start">
@@ -86,9 +110,15 @@ const logout = () => {
                         <ul tabindex="0"
                             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <IntertiaLink href="/home">Home</IntertiaLink>
+                                <IntertiaLink href="/home">
+                                    Home
+                                </IntertiaLink>
                             </li>
-
+                            <li>
+                                <IntertiaLink href="/explore">
+                                    Explore
+                                </IntertiaLink>
+                            </li>
                             <li>
                                 <IntertiaLink href="/">Community</IntertiaLink>
                             </li>
@@ -96,15 +126,19 @@ const logout = () => {
                     </div>
 
                     <InertiaLink href="/" class="btn btn-ghost normal-case text-xl text-primary">
-                        {{ $page.props.appName }}
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-700">
+                            {{ $page.props.appName }}
+                        </span>
                     </InertiaLink>
 
                     <ul class="menu menu-horizontal p-0 hidden lg:flex">
                         <li>
-                            <Link href="/home" class="text-gray-900 dark:text-white">Home</Link>
+                            <Link href="/home" :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/home' }"
+                                class="text-gray-900 dark:text-white">Home</Link>
                         </li>
                         <li>
-                            <IntertiaLink href="/" class="text-gray-900 dark:text-white">Explore</IntertiaLink>
+                            <Link href="/explore" :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                                class="text-gray-900 dark:text-white">Explore</Link>
                         </li>
                         <li>
                             <IntertiaLink href="/" class="text-gray-900 dark:text-white">Community</IntertiaLink>
@@ -137,8 +171,13 @@ const logout = () => {
                         <ul tabindex="0"
                             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <InertiaLink :href="route('profile.show')">
+                                <InertiaLink :href="route('user-profile', $page.props.user.username)">
                                     Profile
+                                </InertiaLink>
+                            </li>
+                            <li>
+                                <InertiaLink :href="route('profile.show')">
+                                    Settings
                                 </InertiaLink>
                             </li>
                             <li>
@@ -159,7 +198,7 @@ const logout = () => {
             </div>
 
             <!-- Page Heading -->
-            <header v-if="$slots.header" class="bg-gray-100 text-gray-100 dark:bg-gray-800 dark:text-white shadow">
+            <header v-if="$slots.header" class="bg-gray-100 text-gray-100 dark:bg-gray-800 dark:text-white">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl font-extrabold"><span
                             class="text-transparent bg-clip-text bg-gradient-to-r to-red-500 from-red-800">

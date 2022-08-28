@@ -17,12 +17,16 @@ class PostController extends Controller
     public function landing(Request $request)
     {
         return Inertia::render('Timeline/Home', [
-            'posts' =>  PostResource::collection(Post::latest()->paginate(15)->withQueryString()),
+            'posts' =>  PostResource::collection(Post::latest()
+            ->when($request->input('search'), function ($query, $search) {
+                $query->where('description', 'like', "%{$search}%");
+            })
+            ->paginate(15)->withQueryString()),
             'filters' => $request->only(['search']),
         ]);
     }
 
-    public function index(Request $request)
+    public function index(Request $request, Post $post)
     {
         return Inertia::render('Timeline/Home', [
             'posts' =>  PostResource::collection(Post::query()->with('user', 'category')->latest()

@@ -16,7 +16,8 @@ class PostResource extends JsonResource
             'category'      =>  $this->category->name,
             'category_id'   =>  $this->category->id,
             'avatar'        =>  $this->user->getProfilePhotoUrlAttribute(),
-            'username'      =>  $this->user->username
+            'username'      =>  $this->user->username,
+            'name'          =>  $this->user->name
         ];
     }
 }
