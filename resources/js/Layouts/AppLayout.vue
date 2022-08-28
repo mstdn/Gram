@@ -56,8 +56,8 @@ const logout = () => {
                     </InertiaLink>
 
                     <div class="menu menu-horizontal p-0 hidden lg:flex">
-                        <Link href="/home"
-                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/home' }"
+                        <Link href="/"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/' }"
                             class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
