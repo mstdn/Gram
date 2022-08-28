@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UpdatePostRequest;
-use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    
+
     public function landing(Request $request)
     {
         return Inertia::render('Timeline/Home', [
             'posts' =>  PostResource::collection(Post::latest()
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('description', 'like', "%{$search}%");
-            })
-            ->paginate(15)->withQueryString()),
+                ->when($request->input('search'), function ($query, $search) {
+                    $query->where('description', 'like', "%{$search}%");
+                })
+                ->paginate(15)->withQueryString()),
             'filters' => $request->only(['search']),
         ]);
     }
@@ -30,13 +31,13 @@ class PostController extends Controller
     {
         return Inertia::render('Timeline/Home', [
             'posts' =>  PostResource::collection(Post::query()->with('user', 'category')->latest()
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('description', 'like', "%{$search}%");
-            })
-            ->paginate(15)
-            ->withQueryString()),
+                ->when($request->input('search'), function ($query, $search) {
+                    $query->where('description', 'like', "%{$search}%");
+                })
+                ->paginate(15)
+                ->withQueryString()),
             'filters' => $request->only(['search'])
-            ]);
+        ]);
     }
 
     /**
@@ -49,12 +50,12 @@ class PostController extends Controller
         //
     }
 
-    
+
     public function store(Request $request)
     {
         $post = $request->validate([
             'description'   =>  'required|min:1|max:500',
-            'file'          => ['required','mimes:jpg,jpeg,png,gif','max:500048'],
+            'file'          => ['required', 'mimes:jpg,jpeg,png,gif', 'max:500048'],
             'category'      =>  ['required', Rule::exists('categories', 'id')],
         ]);
 
@@ -70,7 +71,7 @@ class PostController extends Controller
         return Redirect::route('home');
     }
 
-    
+
     public function show(Post $post, Request $request)
     {
         return Inertia::render('Post/Show', [
@@ -108,6 +109,11 @@ class PostController extends Controller
         if (!Gate::allows('delete-post', $post)) {
             abort(403);
         }
+
+        if (File::exists('storage' . $post->file)) {
+            File::delete('storage' . $post->file);
+        }
+
         $post->delete();
         return Redirect::route('home');
     }
