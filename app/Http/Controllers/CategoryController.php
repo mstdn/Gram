@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Categories/Index', [
-            'categories'    =>  Category::query()
+            'explore'    =>  Category::query()
             ->latest()
             ->paginate(20)
             ->through(fn($category) => [

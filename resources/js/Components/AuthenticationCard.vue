@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 bg-cover bg-center" style="background-image: url(https://gif.local/images/background.jpg)">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 bg-cover bg-center" style="background-image: url(https://gram.social/images/background.jpg)">
         <div>
             <slot name="logo" />
         </div>

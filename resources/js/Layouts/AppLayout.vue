@@ -5,6 +5,7 @@ import JetBanner from '@/Components/Banner.vue';
 import Search from '../Pages/Components/Search.vue';
 import Compose from '../Pages/Components/Compose.vue';
 import PublicSearch from '../Pages/Components/PublicSearch.vue';
+import Mobile from '../Pages/Components/Mobile.vue';
 
 defineProps({
     title: String,
@@ -36,7 +37,9 @@ const logout = () => {
                         <ul tabindex="0"
                             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <Link href="/">Home</Link>
+                                <Link :class="{ 'bg-gray-100': $page.url === '/' }" href="/">
+                                Home
+                                </Link>
                             </li>
                             <li>
                                 <Link href="/login">Login</Link>
@@ -52,22 +55,28 @@ const logout = () => {
                         </span>
                     </InertiaLink>
 
-                    <ul class="menu menu-horizontal p-0 hidden lg:flex">
-                        <li>
-                            <Link :href="route('landing')"
-                                :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/' }"
-                                class="text-gray-900 dark:text-white">
-                            Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link :href="route('categories')"
-                                :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
-                                class="text-gray-900 dark:text-white">
-                            Explore
-                            </Link>
-                        </li>
-                    </ul>
+                    <div class="menu menu-horizontal p-0 hidden lg:flex">
+                        <Link href="/home"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/home' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" />
+                            <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
+                        </svg>
+                        </Link>
+                        <Link href="/explore"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="9" x2="20" y2="9"></line>
+                            <line x1="4" y1="15" x2="20" y2="15"></line>
+                            <line x1="10" y1="3" x2="8" y2="21"></line>
+                            <line x1="16" y1="3" x2="14" y2="21"></line>
+                        </svg>
+                        </Link>
+                    </div>
                 </div>
 
                 <!--  <div class="navbar-center hidden lg:flex">
@@ -131,19 +140,29 @@ const logout = () => {
                         </span>
                     </InertiaLink>
 
-                    <ul class="menu menu-horizontal p-0 hidden lg:flex">
-                        <li>
-                            <Link href="/home" :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/home' }"
-                                class="text-gray-900 dark:text-white">Home</Link>
-                        </li>
-                        <li>
-                            <Link href="/explore" :class="{ 'bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
-                                class="text-gray-900 dark:text-white">Explore</Link>
-                        </li>
-                        <li>
-                            <IntertiaLink href="/" class="text-gray-900 dark:text-white">Community</IntertiaLink>
-                        </li>
-                    </ul>
+                    <div class="menu menu-horizontal p-0 hidden lg:flex ml-3">
+                        <Link href="/home"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/home' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" />
+                            <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
+                        </svg>
+                        </Link>
+                        <Link href="/explore"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="9" x2="20" y2="9"></line>
+                            <line x1="4" y1="15" x2="20" y2="15"></line>
+                            <line x1="10" y1="3" x2="8" y2="21"></line>
+                            <line x1="16" y1="3" x2="14" y2="21"></line>
+                        </svg>
+                        </Link>
+
+                    </div>
 
                 </div>
                 <!-- <div class="navbar-center hidden lg:flex">
@@ -212,6 +231,8 @@ const logout = () => {
             <main>
                 <slot />
             </main>
+
+            <Mobile class="pt-10 z-10" v-if="$page.props.auth.user !== null" />
         </div>
     </div>
 </template>

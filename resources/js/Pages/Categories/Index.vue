@@ -5,7 +5,7 @@ import CategoryCard from '../Components/CategoryCard.vue';
 
 let props = defineProps({
     posts: Object,
-    categories: Object,
+    explore: Object,
 });
 
 </script>
@@ -20,7 +20,7 @@ let props = defineProps({
                 <div class="overflow-hidden sm:rounded-lg">
                     <div class="columns-1 md:columns-3 lg:columns-4">
 
-                        <CategoryCard class="mb-4" v-for="category in categories.data" :key="category.id" :category="category" />
+                        <CategoryCard class="mb-4" v-for="category in explore.data" :key="category.id" :category="category" />
                         
                     </div>
 
