@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelLike\Traits\Likeable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
+    use Likeable;
     use HasFactory;
 
     public function user() 
@@ -17,5 +19,10 @@ class Post extends Model
     public function category() 
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function replies() 
+    {
+        return $this->hasMany(Reply::class);
     }
 }

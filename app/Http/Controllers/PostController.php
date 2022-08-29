@@ -80,29 +80,27 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Post $post)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdatePostRequest $request, Post $post)
     {
         //
     }
 
+    public function like(Post $post)
+    {
+        if (auth()->user()->hasLiked($post)) {
+            auth()->user()->unlike($post);
+        } else {
+            auth()->user()->toggleLike($post);
+        }
+        return back();
+    }
 
     public function destroy(Post $post)
     {

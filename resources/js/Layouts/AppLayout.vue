@@ -6,6 +6,7 @@ import Search from '../Pages/Components/Search.vue';
 import Compose from '../Pages/Components/Compose.vue';
 import PublicSearch from '../Pages/Components/PublicSearch.vue';
 import Mobile from '../Pages/Components/Mobile.vue';
+import MobileSearch from '../Pages/Components/MobileSearch.vue';
 
 defineProps({
     title: String,
@@ -66,7 +67,7 @@ const logout = () => {
                         </svg>
                         </Link>
                         <Link href="/explore"
-                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/explore*' }"
                             class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -102,8 +103,6 @@ const logout = () => {
                     </InertiaLink>
                 </div>
             </div>
-
-
 
             <div v-if="$page.props.auth.user !== null" class="sticky top-0 navbar bg-white dark:bg-gray-900 shadow-sm">
                 <div class="navbar-start">
@@ -174,13 +173,23 @@ const logout = () => {
                     <Search :filters="$page.props.filters" />
 
                     <Compose />
-                    <!--  <button class="btn btn-ghost btn-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="#a7081a">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </button> -->
+
+                    <div class="dropdown dropdown-left lg:hidden md:hidden">
+                        <label tabindex="0" class="btn btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="#a7081a" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </label>
+                        <div tabindex="0"
+                            class="dropdown-content card card-compact w-64 p-1 shadow bg-white dark:bg-gray-900 text-primary-content">
+                            <MobileSearch :filters="$page.props.filters" />
+                        </div>
+                    </div>
+
+
                     <div class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                             <div class="w-10 rounded-full">

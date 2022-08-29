@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         });
         // Route::get('/{note}/edit', [NoteController::class, 'edit']);
         // Route::patch('/{note}/edit', [NoteController::class, 'update'])->name('note.edit');
-        // Route::delete('/{note}/delete', [NoteController::class, 'destroy'])->name('note.destroy');
+        Route::delete('/{post}/delete', [PostController::class, 'destroy'])->name('post.destroy');
     });
+    Route::post('/@{user:username}/follow', [UserController::class, 'follow'])->name('follow');
+    Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('like');
+    Route::post('/posts/{post}/reply', [ReplyController::class, 'store'])->name('reply');
+    Route::delete('/replies/{reply}/delete', [ReplyController::class, 'destroy'])->name('reply.destroy');
 });

@@ -16,4 +16,16 @@ class UserController extends Controller
             'filters' => $request->only(['search']),
         ]);
     }
+
+
+    public function follow(User $user)
+    {
+        if (auth()->user()->isFollowing($user)) {
+            auth()->user()->unfollow($user);
+        } else {
+            auth()->user()->toggleFollow($user);
+        }
+
+        return back();
+    }
 }

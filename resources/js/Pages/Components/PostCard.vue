@@ -43,7 +43,7 @@
                                     </InertiaLink>
                                 </div>
                                 <div class="mt-2">
-                                    <p>{{ post.description }}</p>
+                                    <p class="text-gray-900 dark:text-white">{{ post.description }}</p>
                                 </div>
 
                             </DialogPanel>

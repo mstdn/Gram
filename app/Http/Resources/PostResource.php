@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -10,6 +11,7 @@ class PostResource extends JsonResource
     {
         return [
             'id'            =>  $this->id,
+            'user_id'       =>  $this->user_id,
             'description'   =>  $this->description,
             'time'          =>  $this->created_at->diffForHumans(),
             'file'          =>  '/storage/' . $this->file,    
@@ -17,7 +19,13 @@ class PostResource extends JsonResource
             'category_id'   =>  $this->category->id,
             'avatar'        =>  $this->user->getProfilePhotoUrlAttribute(),
             'username'      =>  $this->user->username,
-            'name'          =>  $this->user->name
+            'name'          =>  $this->user->name,
+            'likes'         =>  $this->likers()->count(),
+            'replies'       =>  $this->replies,
+            'can'           => [
+                'delete'    =>  Auth::user() ? Auth::user()->can('delete-post', $this->resource) : null,
+                'liked'      =>  Auth::user() ? Auth::user()->hasLiked($this->resource) : null
+            ]
         ];
     }
 }

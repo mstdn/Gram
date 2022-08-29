@@ -1,8 +1,7 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
-import Compose from '../Components/Compose.vue';
-import PostCard from '../Components/PostCard.vue';
+import ReplyForm from '../Components/ReplyForm.vue';
+import Reply from '../Components/Reply.vue';
 
 let props = defineProps({
     post: Object,
@@ -25,35 +24,122 @@ function destroy(id) {
 
         <div class="py-10">
             <div class="mx-auto px-4 sm:px-6 lg:px-24">
-                <div class="grid grid-cols-1 sm:grid-cols-10 gap-4 bg-gray-100 rounded-lg">
-                    <div class="col-span-7">
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-10 gap-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg min-h-[600px] max-h-[900px]">
+                    <div class="col-span-7 bg-black">
                         <figure>
-                            <img :src="post.data.file" class="h-full w-full max-h-screen rounded-l-lg" />
+                            <img :src="post.data.file"
+                                class="object-contain w-full center max-h-[600px] rounded-lg" />
                         </figure>
                     </div>
-                    <div class="col-span-3">
-                        <div>
-                            <div class="avatar mt-4 ml-4">
-                                <div class="w-12 rounded-full">
-                                    <InertiaLink :href="route('user-profile', post.data.username)">
-                                        <img :src="post.data.avatar" />
-                                    </InertiaLink>
-                                </div>
-                                <div>
-                                    <div class="ml-3 font-bold text-lg">
-                                        <InertiaLink :href="route('user-profile', post.data.username)">
-                                            {{ post.data.name }}
-                                        </InertiaLink>
+                    <div class="col-span-7 md:col-span-3">
+                        <div class="flex flex-col h-full">
+                            <div class="flex justify-between">
+                                <div class="flex justify-start mt-4 ml-2">
+                                    <div class="avatar">
+                                        <div class="w-12 rounded-full">
+                                            <InertiaLink :href="route('user-profile', post.data.username)">
+                                                <img :src="post.data.avatar" class="w-8" />
+                                            </InertiaLink>
+                                        </div>
                                     </div>
-                                    <div class="ml-3 text-sm">
-                                        <InertiaLink :href="route('user-profile', post.data.username)">
-                                            @{{ post.data.username }}
+                                    <div>
+                                        <div class="ml-3 font-bold text-lg">
+                                            <InertiaLink :href="route('user-profile', post.data.username)">
+                                                {{ post.data.name }}
+                                            </InertiaLink>
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <InertiaLink :href="route('user-profile', post.data.username)">
+                                                @{{ post.data.username }}
+                                            </InertiaLink>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="post.data.can.delete" class="flex justify-end">
+                                    <div class="dropdown dropdown-left mt-2 mr-2">
+                                        <label tabindex="0" class="btn btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="#a7081a" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="1"></circle>
+                                                <circle cx="19" cy="12" r="1"></circle>
+                                                <circle cx="5" cy="12" r="1"></circle>
+                                            </svg>
+                                        </label>
+                                        <ul tabindex="0"
+                                            class="dropdown-content menu p-2 shadow rounded-box w-28 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+                                            <li><a>Edit</a></li>
+                                            <li>
+                                                <button v-if="post.data.can.delete" @click="destroy(post.data.id)"
+                                                    class="btn-link" method="post" type="submit">
+                                                    Delete
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <p class="p-4">{{ post.data.description }}</p>
+
+                            <Reply :post="post" />
+
+                            <div class="mt-auto">
+                                <div class="flex justify-between sm:ml-2 sm:mr-2">
+                                    <div class="flex justify-start">
+                                        <InertiaLink v-if="post.data.can.liked === false" preserveScroll method="post"
+                                            as="button" type="button" class="btn btn-ghost btn-sm gap-2"
+                                            :href="route('like', { id: post.data.id })">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <polygon
+                                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                </polygon>
+                                            </svg>
+                                            {{ post.data.likes }}
+                                        </InertiaLink>
+                                        <InertiaLink v-if="post.data.can.liked === true" preserveScroll method="post"
+                                            as="button" type="button" class="btn btn-ghost btn-sm btn-block gap-2"
+                                            :href="route('like', { id: post.data.id })">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="#f8e71c" stroke="#f8e71c" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <polygon
+                                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                </polygon>
+                                            </svg>
+                                            {{ post.data.likes }}
+                                        </InertiaLink>
+                                        <InertiaLink v-if="$page.props.auth.user === null"
+                                            :href="route('show-post', { id: post.data.id })"
+                                            class="btn btn-ghost btn-sm btn-block gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <polygon
+                                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                </polygon>
+                                            </svg>
+                                            {{ post.data.likes }}
                                         </InertiaLink>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="w-full p-4 md:pr-5">
+
+
+                                <ReplyForm :post="post" />
+
+
+                                <!-- <input type="text" placeholder="Type your reply"
+                                    class="input input-bordered input-primary w-full" /> -->
+                            </div>
                         </div>
-                        <p class="p-4">{{ post.data.description }}</p>
+
                     </div>
                 </div>
             </div>
