@@ -10,7 +10,7 @@ let props = defineProps({
 
 </script>
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Explore &amp; Discover Gram Social">
         <template #header>
             {{ category }}
         </template>

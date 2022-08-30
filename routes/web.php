@@ -21,12 +21,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::middleware('optimizeImages')->group(function () {
             Route::post('/', [PostController::class, 'store'])->name('store.post');
         });
-        // Route::get('/{note}/edit', [NoteController::class, 'edit']);
-        // Route::patch('/{note}/edit', [NoteController::class, 'update'])->name('note.edit');
         Route::delete('/{post}/delete', [PostController::class, 'destroy'])->name('post.destroy');
     });
     Route::post('/@{user:username}/follow', [UserController::class, 'follow'])->name('follow');
     Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('like');
     Route::post('/posts/{post}/reply', [ReplyController::class, 'store'])->name('reply');
     Route::delete('/replies/{reply}/delete', [ReplyController::class, 'destroy'])->name('reply.destroy');
+    Route::group(['middleware' => 'admin'], function () {
+        Route::post('/explore', [CategoryController::class, 'store'])->name('category.store');
+        Route::delete('/explore/{categeory:slug}/delete', [CategoryController::class, 'destory'])->name('category.destroy');
+    });
 });
