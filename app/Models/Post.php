@@ -11,6 +11,8 @@ class Post extends Model
     use Likeable;
     use HasFactory;
 
+    protected $with = ['user', 'category', 'replies'];
+
     public function user() 
     {
         return $this->belongsTo(User::class, 'user_id');

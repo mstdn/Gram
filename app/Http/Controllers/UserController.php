@@ -12,7 +12,7 @@ class UserController extends Controller
     public function show(User $user, Request $request)
     {
         return Inertia::render('User/Show', [
-            'profile'  =>  UserResource::make($user),
+            'profile'  =>  UserResource::make($user->load('posts', 'likes')),
             'filters' => $request->only(['search']),
         ]);
     }

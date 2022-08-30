@@ -28,8 +28,7 @@ function destroy(id) {
                     class="grid grid-cols-1 sm:grid-cols-10 gap-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg min-h-[600px] max-h-[900px]">
                     <div class="col-span-7 bg-black">
                         <figure>
-                            <img :src="post.data.file"
-                                class="object-contain w-full center max-h-[600px] rounded-lg" />
+                            <img :src="post.data.file" class="object-contain w-full center max-h-[600px] rounded-lg" />
                         </figure>
                     </div>
                     <div class="col-span-7 md:col-span-3">
@@ -81,8 +80,7 @@ function destroy(id) {
                                 </div>
                             </div>
 
-
-                            <p class="p-4">{{ post.data.description }}</p>
+                            <p class="p-4 text-sm">{{ post.data.description }}</p>
 
                             <Reply :post="post" />
 
@@ -130,13 +128,7 @@ function destroy(id) {
                             </div>
 
                             <div class="w-full p-4 md:pr-5">
-
-
-                                <ReplyForm :post="post" />
-
-
-                                <!-- <input type="text" placeholder="Type your reply"
-                                    class="input input-bordered input-primary w-full" /> -->
+                                <ReplyForm v-if="$page.props.auth.user !== null" :post="post" />
                             </div>
                         </div>
 

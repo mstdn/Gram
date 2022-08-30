@@ -30,12 +30,17 @@ class PostController extends Controller
     public function index(Request $request, Post $post)
     {
         return Inertia::render('Timeline/Home', [
-            'posts' =>  PostResource::collection(Post::query()->with('user', 'category')->latest()
+            'posts' =>  PostResource::collection(
+                Post::query()
+                ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
+                ->with('user', 'category', 'replies')
+                ->latest()
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('description', 'like', "%{$search}%");
                 })
                 ->paginate(15)
-                ->withQueryString()),
+                ->withQueryString()
+            ),
             'filters' => $request->only(['search'])
         ]);
     }

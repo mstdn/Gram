@@ -14,6 +14,7 @@ class CategoryController extends Controller
     {
         return Inertia::render('Categories/Index', [
             'explore'    =>  Category::query()
+            ->with('posts')
             ->latest()
             ->paginate(20)
             ->through(fn($category) => [
@@ -29,7 +30,7 @@ class CategoryController extends Controller
     public function show(Request $request, Category $category) 
     {
         return Inertia::render('Categories/Show', [
-            'posts'  =>  PostResource::collection($category->posts),
+            'posts'  =>  PostResource::collection($category->posts->load('category', 'user')),
             'category'  =>  $category->name,
             'filters' => $request->only(['search'])
         ]);
