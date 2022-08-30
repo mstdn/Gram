@@ -82,10 +82,19 @@ function destroy(id) {
 
                             <p class="p-4 text-sm">{{ post.data.description }}</p>
 
-                            <Reply :post="post" />
+                            <!-- <div v-if="showLess">
+                                <div v-for="(value, index) in object">
+                                    <template v-if="index <= 5"></template>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div v-for="value in object"></div>
+                            </div>
+                            <button @click="showLess = false"></button> -->
+
 
                             <div class="mt-auto">
-                                <div class="flex justify-between sm:ml-2 sm:mr-2">
+                                <div class="flex justify-between ml-2 mr-2">
                                     <div class="flex justify-start">
                                         <InertiaLink v-if="post.data.can.liked === false" preserveScroll method="post"
                                             as="button" type="button" class="btn btn-ghost btn-sm gap-2"
@@ -123,6 +132,32 @@ function destroy(id) {
                                             </svg>
                                             {{ post.data.likes }}
                                         </InertiaLink>
+                                    </div>
+                                    <div class="flex justify-end mr-6">
+                                        <!-- The button to open replies modal -->
+                                        <label for="repliesModal" class="btn btn-ghost btn-sm modal-button gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="#a7081a" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path
+                                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                                </path>
+                                            </svg>
+                                            {{ post.data.replycount }}
+                                        </label>
+
+                                        <!-- Replies modal -->
+                                        <input type="checkbox" id="repliesModal" class="modal-toggle" />
+                                        <label for="repliesModal" class="modal cursor-pointer">
+                                            <label class="modal-box relative bg-white text-gray-900 dark:text-white dark:bg-gray-900" for="">
+                                                <label for="repliesModal"
+                                                    class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                                <Reply :post="post" />
+                                                <div class="w-full p-4 md:pr-5">
+                                                    <ReplyForm v-if="$page.props.auth.user !== null" :post="post" />
+                                                </div>
+                                            </label>
+                                        </label>
                                     </div>
                                 </div>
                             </div>

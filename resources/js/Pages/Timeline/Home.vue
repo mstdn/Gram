@@ -38,9 +38,9 @@ function destroy(id) {
 };
 </script>
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Home Feed">
         <template #header>
-            Home
+            Home Feed
         </template>
 
         <div class="py-12">
