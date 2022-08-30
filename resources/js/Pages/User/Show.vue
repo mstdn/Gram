@@ -2,6 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PostCard from '../Components/PostCard.vue';
 import SimplePagination from '../Components/SimplePagination.vue';
+import Empty from '../Components/Empty.vue';
 
 let props = defineProps({
     posts: Object,
@@ -101,6 +102,8 @@ let props = defineProps({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden sm:rounded-lg">
+
+                    <Empty v-if="profile.data.postcount === 0" class="columns-1 mt-20" />
 
                     <div class="columns-1 md:columns-3 lg:columns-4">
                         <PostCard class="mb-4" v-for="post in profile.data.posts" :key="post.id" :post="post" />

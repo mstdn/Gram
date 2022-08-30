@@ -36,18 +36,28 @@ const logout = () => {
                             </svg>
                         </label>
                         <ul tabindex="0"
-                            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white rounded-box w-52">
                             <li>
-                                <Link :class="{ 'bg-gray-100': $page.url === '/' }" href="/">
+                                <Link :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/' }" href="/">
                                 Home
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/login">Login</Link>
+                                <Link href="/community" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
+                                Community
+                                </Link>
                             </li>
                             <li>
-                                <Link href="/register">Register</Link>
+                                <Link href="/login" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/login' }">
+                                Login
+                                </Link>
                             </li>
+                            <li>
+                                <Link href="/register" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/register' }">
+                                Register
+                                </Link>
+                            </li>
+
                         </ul>
                     </div>
                     <InertiaLink href="/" class="btn btn-ghost normal-case text-xl text-primary">
@@ -75,6 +85,17 @@ const logout = () => {
                             <line x1="4" y1="15" x2="20" y2="15"></line>
                             <line x1="10" y1="3" x2="8" y2="21"></line>
                             <line x1="16" y1="3" x2="14" y2="21"></line>
+                        </svg>
+                        </Link>
+                        <Link href="/community"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/community' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                         </Link>
                     </div>
@@ -118,17 +139,24 @@ const logout = () => {
                         <ul tabindex="0"
                             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white rounded-box w-52">
                             <li>
-                                <Link :href="route('home')">
-                                    Home
+                                <Link :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/home' }" href="/home">
+                                Home
                                 </Link>
                             </li>
                             <li>
-                                <Link :href="route('categories')">
-                                    Explore
+                                <Link :href="route('public')" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/public' }">
+                                Public
                                 </Link>
                             </li>
                             <li>
-                                <IntertiaLink href="/">Community</IntertiaLink>
+                                <Link :href="route('categories')" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/explore' }">
+                                Explore
+                                </Link>
+                            </li>
+                            <li>
+                                <Link :href="route('community')" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
+                                Community
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -149,8 +177,8 @@ const logout = () => {
                             <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
                         </svg>
                         </Link>
-                        <Link href="/explore"
-                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                        <Link href="/public"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/public' }"
                             class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -160,7 +188,28 @@ const logout = () => {
                             <line x1="16" y1="3" x2="14" y2="21"></line>
                         </svg>
                         </Link>
-
+                        <Link href="/explore"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/explore' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        </Link>
+                        <Link href="/community"
+                            :class="{ 'btn btn-circle btn-ghost bg-gray-100 dark:bg-gray-800': $page.url === '/community' }"
+                            class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        </Link>
                     </div>
 
                 </div>

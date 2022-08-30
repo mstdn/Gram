@@ -13,9 +13,10 @@ Route::get('@{user:username}', [UserController::class, 'show'])->name('user-prof
 Route::get('/p/{post:id}', [PostController::class, 'show'])->name('show-post');
 Route::get('/explore', [CategoryController::class, 'index'])->name('categories');
 Route::get('/explore/{category:slug}', [CategoryController::class, 'show'])->name('show-category');
+Route::get('/community', [UserController::class, 'index'])->name('community');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    Route::get('/dashboard', [TimelineController::class, 'dashboard'])->name('dashboard');
+    Route::get('/public', [PostController::class, 'public'])->name('public');
     Route::group(['prefix' => 'home'], function () {
         Route::get('/', [PostController::class, 'index'])->name('home');
         Route::middleware('optimizeImages')->group(function () {

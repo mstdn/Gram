@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="mobile-web-app-capable" content="yes">
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'Gram Social') }}</title>
 
-        <meta property="og:site_name" content="{{ config('app.name', 'LifeDash') }}">
-        <meta property="og:title" content="{{ config('app.name', 'LifeDash') }}">
+        <meta property="og:site_name" content="{{ config('app.name', 'Gram Social') }}">
+        <meta property="og:title" content="{{ config('app.name', 'Gram Social') }}">
         <meta property="og:type" content="article">
         <meta property="og:url" content="{{request()->url()}}">
 

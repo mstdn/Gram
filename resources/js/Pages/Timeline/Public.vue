@@ -4,7 +4,6 @@ import throttle from "lodash/throttle";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from '@inertiajs/inertia-vue3';
-import Compose from '../Components/Compose.vue';
 import PostCard from '../Components/PostCard.vue';
 import SimplePagination from '../Components/SimplePagination.vue';
 import Empty from '../Components/Empty.vue';
@@ -20,7 +19,7 @@ watch(
     search,
     throttle(function (value) {
         Inertia.get(
-            "/home",
+            "/public",
             { search: value },
             {
                 preserveState: true,
@@ -41,7 +40,7 @@ function destroy(id) {
 <template>
     <AppLayout title="Home Feed">
         <template #header>
-            Home Feed
+            Public Feed
         </template>
 
         <div class="py-12">

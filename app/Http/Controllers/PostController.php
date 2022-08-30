@@ -17,29 +17,56 @@ class PostController extends Controller
 
     public function landing(Request $request)
     {
-        return Inertia::render('Timeline/Home', [
-            'posts' =>  PostResource::collection(Post::latest()
-                ->when($request->input('search'), function ($query, $search) {
-                    $query->where('description', 'like', "%{$search}%");
-                })
-                ->paginate(15)->withQueryString()),
+        return Inertia::render('Timeline/Public', [
+            'posts' =>  PostResource::collection(
+                Post::query()
+                    ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
+                    ->with('user', 'category', 'replies')
+                    ->latest()
+                    ->when($request->input('search'), function ($query, $search) {
+                        $query->where('description', 'like', "%{$search}%");
+                    })
+                    ->paginate(15)
+                    ->withQueryString()
+            ),
             'filters' => $request->only(['search']),
         ]);
     }
 
-    public function index(Request $request, Post $post)
+    public function index(Request $request)
     {
         return Inertia::render('Timeline/Home', [
+            'posts' => PostResource::collection(
+                Post::where(function ($query) {
+                    $query->where('user_id', auth()->id())
+                        ->orWhereIn('user_id', auth()->user()->followings->pluck('followable_id'));
+                })
+                    ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
+                    ->with('user', 'replies', 'likers')
+                    ->latest()
+                    ->when($request->input('search'), function ($query, $search) {
+                        $query->where('description', 'like', "%{$search}%");
+                    })
+                    ->paginate(20)
+                    ->withQueryString()
+            ),
+            'filters' => $request->only(['search'])
+        ]);
+    }
+
+    public function public(Request $request)
+    {
+        return Inertia::render('Timeline/Public', [
             'posts' =>  PostResource::collection(
                 Post::query()
-                ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
-                ->with('user', 'category', 'replies')
-                ->latest()
-                ->when($request->input('search'), function ($query, $search) {
-                    $query->where('description', 'like', "%{$search}%");
-                })
-                ->paginate(15)
-                ->withQueryString()
+                    ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
+                    ->with('user', 'category', 'replies')
+                    ->latest()
+                    ->when($request->input('search'), function ($query, $search) {
+                        $query->where('description', 'like', "%{$search}%");
+                    })
+                    ->paginate(15)
+                    ->withQueryString()
             ),
             'filters' => $request->only(['search'])
         ]);

@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'Gram',
     'manifest' => [
-        'name' => env('APP_NAME', 'My PWA App'),
-        'short_name' => 'PWA',
+        'name' => env('APP_NAME', 'Gram'),
+        'short_name' => 'Gram',
         'start_url' => '/',
-        'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'background_color' => '#a7081a',
+        'theme_color' => '#a7081a',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
@@ -59,18 +59,18 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
-                'url' => '/shortcutlink1',
+                'name' => 'Home',
+                'description' => 'Home Feed',
+                'url' => '/home',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"
                 ]
             ],
             [
-                'name' => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
-                'url' => '/shortcutlink2'
+                'name' => 'Public',
+                'description' => 'Public Feed',
+                'url' => '/public'
             ]
         ],
         'custom' => []
