@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card w-full bg-base-100 shadow">
+        <div class="card card-compact w-full bg-gray-100 dark:bg-gray-800 shadow">
             <div class="card-body items-center">
                 <h1 class="card-title text-3xl font-extrabold">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r to-red-500 from-red-800">
@@ -9,9 +9,9 @@
                         </InertiaLink>
                     </span>
                 </h1>
-                <p class="text-center py-2">{{ category.count }} total posts.</p>
+                <p class="text-center py-6 text-gray-900 dark:text-white">{{ category.count }} total posts.</p>
                 <div class="card-actions justify-center">
-                    <InertiaLink :href="route('show-category', category.slug)" class="btn btn-primary btn-block">Browse
+                    <InertiaLink :href="route('show-category', category.slug)" class="btn btn-outline btn-warning btn-wide btn-xs">Browse
                         {{ category.name }}</InertiaLink>
                 </div>
             </div>

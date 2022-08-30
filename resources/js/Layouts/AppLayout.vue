@@ -116,16 +116,16 @@ const logout = () => {
                             </svg>
                         </label>
                         <ul tabindex="0"
-                            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white rounded-box w-52">
                             <li>
-                                <IntertiaLink href="/home">
+                                <Link :href="route('home')">
                                     Home
-                                </IntertiaLink>
+                                </Link>
                             </li>
                             <li>
-                                <IntertiaLink href="/explore">
+                                <Link :href="route('categories')">
                                     Explore
-                                </IntertiaLink>
+                                </Link>
                             </li>
                             <li>
                                 <IntertiaLink href="/">Community</IntertiaLink>
@@ -197,7 +197,7 @@ const logout = () => {
                             </div>
                         </label>
                         <ul tabindex="0"
-                            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white rounded-box w-52">
                             <li>
                                 <InertiaLink :href="route('user-profile', $page.props.user.username)">
                                     Profile

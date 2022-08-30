@@ -19,10 +19,14 @@ class CategoryController extends Controller
             'explore'    =>  CategoryResource::collection(
                 Category::query()
                 ->with('posts')
+                ->when($request->input('searchCategories'), function ($query, $searchCategories) {
+                    $query->where('name', 'like', "%{$searchCategories}%");
+                })
                 ->latest()
-                ->paginate(20)
+                ->paginate(12)
                 ),
-            'filters' => $request->only(['search']),
+            'search' => $request->only(['searchCategories']),
+            'filters' => $request->only(['search'])
         ]);
     }
 
