@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@headlessui/vue": "^1.6.7",
+        "bootstrap-icons": "^1.9.1",
         "daisyui": "^2.24.0",
         "flowbite": "^1.5.2",
         "resize-textarea-vue3": "^1.1.1"

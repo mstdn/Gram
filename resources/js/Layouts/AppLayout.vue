@@ -7,6 +7,7 @@ import Compose from '../Pages/Components/Compose.vue';
 import PublicSearch from '../Pages/Components/PublicSearch.vue';
 import Mobile from '../Pages/Components/Mobile.vue';
 import MobileSearch from '../Pages/Components/MobileSearch.vue';
+import Footer from '../Pages/Components/Footer.vue';
 
 defineProps({
     title: String,
@@ -19,12 +20,11 @@ const logout = () => {
 
 <template>
     <div>
-
         <Head :title="title" />
 
         <JetBanner />
 
-        <div class="min-h-screen bg-white dark:bg-gray-900">
+        <div class="bg-white dark:bg-gray-900">
             <div v-if="$page.props.auth.user === null" class="sticky top-0 navbar bg-white dark:bg-gray-900 shadow-sm">
                 <div class="navbar-start ">
                     <div class="dropdown">
@@ -285,12 +285,12 @@ const logout = () => {
                 </div>
             </header>
 
-            <!-- Page Content -->
             <main>
                 <slot />
             </main>
 
             <Mobile class="pt-10 z-10" v-if="$page.props.auth.user !== null" />
+            <Footer class="mt-auto hidden md:flex" />
         </div>
     </div>
 </template>

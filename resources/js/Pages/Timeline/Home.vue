@@ -44,7 +44,7 @@ function destroy(id) {
             Home Feed
         </template>
 
-        <div class="py-12">
+        <div class="pt-12">
             <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="overflow-hidden sm:rounded-lg">
 

@@ -11,7 +11,7 @@ class Post extends Model
     use Likeable;
     use HasFactory;
 
-    protected $with = ['user', 'category', 'replies'];
+    /* protected $with = ['user', 'category']; */
 
     public function user() 
     {
