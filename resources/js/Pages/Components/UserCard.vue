@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card card-compact dark:bg-gray-800 dark:text-white bg-white text-gray-900">
+        <div class="card card-compact dark:bg-gray-800 dark:text-white bg-gray-100 text-gray-900">
             <div class="card-body">
                 <div class="flex justify-between">
                     <h2 class="card-title">

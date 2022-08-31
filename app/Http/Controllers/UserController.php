@@ -15,8 +15,8 @@ class UserController extends Controller
             'profiles'  =>  UserResource::collection(
                 User::with('posts', 'likes', 'followers', 'followables')
                 ->latest()
-                ->when($request->input('searchUser'), function ($query, $searchUser) {
-                    $query->where('description', 'like', "%{$searchUser}%");
+                ->when($request->input('searchUsers'), function ($query, $searchUsers) {
+                    $query->where('name', 'like', "%{$searchUsers}%");
                 })
                 ->paginate(15)
                 ->withQueryString()
