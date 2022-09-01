@@ -3,6 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import PostCard from '../Components/PostCard.vue';
 import SimplePagination from '../Components/SimplePagination.vue';
 import Empty from '../Components/Empty.vue';
+import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 
 let props = defineProps({
     posts: Object,
@@ -12,10 +13,8 @@ let props = defineProps({
 
 </script>
 <template>
-    <AppLayout title="Dashboard">
-        <template #header>
-            {{ profile.data.name }}
-        </template>
+    <AppLayout title="User Profile">
+
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -71,26 +70,26 @@ let props = defineProps({
                     <ul
                         class="menu menu-vertical lg:menu-horizontal bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white rounded-box">
                         <li>
-                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.id)"
-                                :active="route().current('user-profile', profile.data.id)">
+                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
+                                :active="route().current('user-profile', profile.data.username)">
                                 {{ profile.data.postcount }} Posts
                             </InertiaLink>
                         </li>
                         <li>
-                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.id)"
-                                :active="route().current('user-profile', profile.data.id)">
+                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
+                                :active="route().current('user-profile', profile.data.username)">
                                 0 Boards
                             </InertiaLink>
                         </li>
                         <li>
-                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.id)"
-                                :active="route().current('user-profile', profile.data.id)">
+                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
+                                :active="route().current('user-profile', profile.data.username)">
                                 {{ profile.data.followings }} Following
                             </InertiaLink>
                         </li>
                         <li>
-                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.id)"
-                                :active="route().current('user-profile', profile.data.id)">
+                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
+                                :active="route().current('user-profile', profile.data.username)">
                                 {{ profile.data.followers }} Followers
                             </InertiaLink>
                         </li>
@@ -103,15 +102,61 @@ let props = defineProps({
             <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="overflow-hidden sm:rounded-lg">
 
-                    <Empty v-if="profile.data.postcount === 0" class="columns-1 mt-20" />
+                    <TabGroup>
+                        <TabList class="text-center flex space-x-1 bg-gray-200 dark:bg-gray-800 rounded-lg">
+                            <Tab v-slot="{ selected }" as="template">
+                                <button :class="[selected ? 'btn btn-primary' : 'btn btn-primary btn-active']">
+                                    Posts
+                                </button>
+                            </Tab>
+                            <Tab v-slot="{ selected }" as="template">
+                                <button :class="[selected ? 'btn btn-primary' : 'btn btn-primary btn-active']">
+                                    Liked
+                                </button>
+                            </Tab>
+                            <Tab v-slot="{ selected }" as="template">
+                                <button :class="[selected ? 'btn btn-primary' : 'btn btn-primary btn-active']">
+                                    Shared
+                                </button>
+                            </Tab>
+                        </TabList>
+                        <TabPanels>
+                            <TabPanel>
 
-                    <div class="columns-1 md:columns-3 lg:columns-4">
-                        <PostCard class="mb-4" v-for="post in profile.data.posts" :key="post.id" :post="post" />
-                    </div>
+                                <Empty v-if="posts.meta.total === 0" class="columns-1 mt-20" />
 
-                    <!-- <div class="columns-1 md:columns-1 lg:columns-1 mt-6">
-                        <SimplePagination v-if="posts.meta.total >= 15" :data="posts.links" />
-                    </div> -->
+                                <div class="columns-1 md:columns-3 lg:columns-4">
+                                    <PostCard class="mb-4" v-for="post in posts.data" :key="post.id" :post="post" />
+                                </div>
+
+                                <div class="columns-1 md:columns-1 lg:columns-1 mt-6">
+                                    <SimplePagination v-if="posts.meta.total >= 15" :data="posts.links" />
+                                </div>
+
+                            </TabPanel>
+                            <TabPanel>
+                                <div class="px-4 mx-auto max-w-screen-xl">
+                                    <div class="mx-auto max-w-screen-sm text-center p-10">
+
+                                        Soon.
+
+                                    </div>
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                                <div class="px-4 mx-auto max-w-screen-xl lg:px-6">
+                                    <div class="mx-auto max-w-screen-sm text-center p-10">
+
+                                        Soon.
+
+                                    </div>
+                                </div>
+                            </TabPanel>
+                        </TabPanels>
+                    </TabGroup>
+
+
+
                 </div>
             </div>
         </div>

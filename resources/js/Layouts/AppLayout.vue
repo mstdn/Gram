@@ -290,7 +290,7 @@ const logout = () => {
             </main>
 
             <Mobile class="pt-10 z-10" v-if="$page.props.auth.user !== null" />
-            <Footer class="mt-auto hidden md:flex" />
+            <!-- <Footer class="mt-auto hidden md:flex" /> -->
         </div>
     </div>
 </template>

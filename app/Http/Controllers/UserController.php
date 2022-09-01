@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -29,11 +30,16 @@ class UserController extends Controller
     public function show(User $user, Request $request)
     {
         return Inertia::render('User/Show', [
-            'profile'  =>  UserResource::make($user->load('posts', 'likes')),
-            'filters' => $request->only(['search']),
+            'profile'   =>  UserResource::make($user->load('followers', 'followables')),
+            'posts'     =>  PostResource::collection(
+                $user->posts()->latest()
+                ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
+                ->with('user', 'replies', 'likers')
+                ->paginate(15)
+            ),
+            'filters'   => $request->only(['search']),
         ]);
     }
-
 
     public function follow(User $user)
     {

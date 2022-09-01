@@ -33,7 +33,12 @@ class CategoryController extends Controller
     public function show(Request $request, Category $category)
     {
         return Inertia::render('Categories/Show', [
-            'posts'  =>  PostResource::collection($category->posts->load('category', 'user')),
+            'posts'  =>  PostResource::collection(
+                $category->posts()
+                ->with('user', 'category')
+                ->latest()
+                ->paginate(15)
+            ),
             'category'  =>  $category->name,
             'filters' => $request->only(['search'])
         ]);

@@ -9,12 +9,11 @@ use Illuminate\Validation\Rule;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\UpdatePostRequest;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
-
     public function landing(Request $request)
     {
         return Inertia::render('Timeline/Public', [
@@ -72,26 +71,26 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-
     public function store(Request $request)
     {
         $post = $request->validate([
             'description'   =>  'required|min:1|max:500',
-            'file'          => ['required', 'mimes:jpg,jpeg,png,gif', 'max:500048'],
+            'file'          =>  ['required', 'mimes:jpg,jpeg,png,gif', 'max:500048'],
             'category'      =>  ['required', Rule::exists('categories', 'id')],
         ]);
 
         $post['user_id'] = auth()->id();
+
+        /* $image = $request->file('file');
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+     
+        $destinationPath = Storage::disk('public')
+        $img = Image::make($image->getRealPath());
+        $img->resize(1000, 600, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save('uploads/' .$input['imagename'], 80); */
+   
+        //$this->postImage->add($input);
 
         $post = Post::create([
             'user_id'       =>  auth()->id(),
@@ -103,25 +102,12 @@ class PostController extends Controller
         return Redirect::route('home');
     }
 
-
     public function show(Post $post, Request $request)
     {
         return Inertia::render('Post/Show', [
             'post'  =>  PostResource::make($post),
             'filters' => $request->only(['search'])
         ]);
-    }
-
-
-    public function edit(Post $post)
-    {
-        //
-    }
-
-
-    public function update(UpdatePostRequest $request, Post $post)
-    {
-        //
     }
 
     public function like(Post $post)
