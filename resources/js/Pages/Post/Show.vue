@@ -16,19 +16,19 @@ function destroy(id) {
 </script>
 <template>
     <AppLayout title="Post">
-        <template #header>
+        <!-- <template #header>
             By <InertiaLink :href="route('user-profile', post.data.username)">
                 @{{ post.data.username }}
             </InertiaLink>
-        </template>
+        </template> -->
 
-        <div class="py-10">
+        <div class="py-10 lg:py-20">
             <div class="mx-auto px-4 sm:px-6 lg:px-24">
                 <div
                     class="grid grid-cols-1 sm:grid-cols-10 gap-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg min-h-[600px] max-h-[900px]">
-                    <div class="col-span-7 bg-black">
+                    <div class="col-span-7 bg-black rounded-lg lg:rounded-l-lg">
                         <figure>
-                            <img :src="post.data.file" class="object-contain w-full center max-h-[600px] rounded-lg" />
+                            <img :src="post.data.file" class="object-contain w-full center max-h-[600px] rounded-t-lg lg:rounded-l-lg" />
                         </figure>
                     </div>
                     <div class="col-span-7 md:col-span-3">

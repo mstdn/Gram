@@ -20,6 +20,7 @@ const logout = () => {
 
 <template>
     <div>
+
         <Head :title="title" />
 
         <JetBanner />
@@ -39,25 +40,38 @@ const logout = () => {
                             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white rounded-box w-52">
                             <li>
                                 <Link :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/' }" href="/">
-                                Home
+                                Browse
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/community" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
+                                <Link href="/community"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
                                 Community
                                 </Link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <Link href="/login" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/login' }">
                                 Login
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/register" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/register' }">
+                                <Link href="/register"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/register' }">
                                 Register
                                 </Link>
+                            </li> -->
+                            <li>
+                                <Link href="/terms-of-service"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/terms-of-service' }">
+                                Terms of Service
+                                </Link>
                             </li>
-
+                            <li>
+                                <Link href="/privacy-policy"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/privacy-policy' }">
+                                Privacy Policy
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <InertiaLink href="/" class="btn btn-ghost normal-case text-xl text-primary">
@@ -98,6 +112,42 @@ const logout = () => {
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                         </Link>
+                        <div class="dropdown">
+                            <label tabindex="0"
+                                class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="#a7081a" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="12" cy="5" r="1"></circle>
+                                    <circle cx="12" cy="19" r="1"></circle>
+                                </svg>
+                            </label>
+                            <ul tabindex="0"
+                                class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 rounded-box w-48">
+                                <li>
+                                    <InertiaLink href="/"
+                                        class="btn-link btn-block hover:bg-gray-100 hover:dark:bg-gray-800"
+                                        :class="{ 'btn-link btn-block bg-gray-200 dark:bg-gray-700': $page.url === '/' }">
+                                        About
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink href="/terms-of-service"
+                                        class="btn-link btn-block hover:bg-gray-100 hover:dark:bg-gray-800"
+                                        :class="{ 'btn-link btn-block bg-gray-200 dark:bg-gray-700': $page.url === '/terms-of-service' }">
+                                        Terms of Service
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink href="/privacy-policy"
+                                        class="btn-link btn-block hover:bg-gray-100 hover:dark:bg-gray-800"
+                                        :class="{ 'btn-link btn-block bg-gray-200 dark:bg-gray-700': $page.url === '/privacy-policy' }">
+                                        Privacy Policy
+                                    </InertiaLink>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -144,17 +194,20 @@ const logout = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link :href="route('public')" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/public' }">
+                                <Link :href="route('public')"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/public' }">
                                 Public
                                 </Link>
                             </li>
                             <li>
-                                <Link :href="route('categories')" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/explore' }">
+                                <Link :href="route('categories')"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/explore' }">
                                 Explore
                                 </Link>
                             </li>
                             <li>
-                                <Link :href="route('community')" :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
+                                <Link :href="route('community')"
+                                    :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
                                 Community
                                 </Link>
                             </li>
@@ -210,6 +263,42 @@ const logout = () => {
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                         </Link>
+                        <div class="dropdown">
+                            <label tabindex="0"
+                                class="btn btn-circle btn-ghost hover:bg-gray-100 hover:dark:bg-gray-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="#a7081a" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="12" cy="5" r="1"></circle>
+                                    <circle cx="12" cy="19" r="1"></circle>
+                                </svg>
+                            </label>
+                            <ul tabindex="0"
+                                class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white text-gray-900 rounded-box w-48">
+                                <li>
+                                    <InertiaLink href="/"
+                                        class="btn-link btn-block hover:bg-gray-100 hover:dark:bg-gray-800"
+                                        :class="{ 'btn-link btn-block bg-gray-200 dark:bg-gray-700': $page.url === '/' }">
+                                        About
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink href="/terms-of-service"
+                                        class="btn-link btn-block hover:bg-gray-100 hover:dark:bg-gray-800"
+                                        :class="{ 'btn-link btn-block bg-gray-200 dark:bg-gray-700': $page.url === '/terms-of-service' }">
+                                        Terms of Service
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink href="/privacy-policy"
+                                        class="btn-link btn-block hover:bg-gray-100 hover:dark:bg-gray-800"
+                                        :class="{ 'btn-link btn-block bg-gray-200 dark:bg-gray-700': $page.url === '/privacy-policy' }">
+                                        Privacy Policy
+                                    </InertiaLink>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
