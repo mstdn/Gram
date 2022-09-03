@@ -2,7 +2,7 @@
 
 Meow there! This is Gram. Gram is a free open source photo sharing social media platform build with modern technologies.
 
-A live demo can be found on (Gram.Social)[https://gram.social]
+A live demo can be found on [Gram.Social](https://gram.social).
 
 - [Laravel 9.x](https://laravel.com/).
 - [Vue JS 3.x](https://vuejs.org/).
