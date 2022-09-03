@@ -1,6 +1,6 @@
-## Install Goldfish Social
+## Install Gram
 
-Goldfish is build on Laravel and very easy to install. You do need the following:
+Gram is build on Laravel and very easy to install. You do need the following:
 
 - PHP 8.1.x
 - MySQL / SQLLite
@@ -13,7 +13,7 @@ Goldfish is build on Laravel and very easy to install. You do need the following
 
 Start with cloning the repo to your server:
 
-`git clone https://github.com/Goldfish-Social/Goldfish.git`
+`git clone https://github.com/mstdn/Gram.git`
 
 
 
@@ -44,20 +44,11 @@ Database migrations must be run:
 `php artisan migrate --force`
 
 
-Install and publish Horizon:
-
-`php artisan horizon:install`
-`php artisan horizon`
-
 
 Compile the app with Node:
 
 `npm run build`
 
-
-Start Horizon (service files later. Fow now use 'tmux' or something):
-
-`php artisan horizon`
 
 
 
