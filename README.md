@@ -31,4 +31,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-Goldfish Social is open-sourced software licensed under the AGPL license.
+Gram is open-sourced software licensed under the AGPL license.
