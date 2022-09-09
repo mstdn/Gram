@@ -31,7 +31,6 @@
                             <line x1="20" y1="8" x2="20" y2="14"></line>
                             <line x1="23" y1="11" x2="17" y2="11"></line>
                         </svg>
-                        
                     </InertiaLink>
                     <InertiaLink
                         v-if="$page.props.auth.user !== null && profile.is.following === true && profile.is.self === false"
@@ -43,21 +42,20 @@
                             <circle cx="8.5" cy="7" r="4"></circle>
                             <line x1="23" y1="11" x2="17" y2="11"></line>
                         </svg>
-                        
                     </InertiaLink>
                 </div>
                 <p class="my-4">{{ profile.about }}</p>
                 
-                <div class="card-actions justify-between">
-                    <InertiaLink preserve-scroll class="btn btn-xs btn-outline btn-primary"
+                <div class="card-actions">
+                    <InertiaLink preserve-scroll class="btn-link"
                         :href="route('user-profile', { id: profile.username })">
                         {{ profile.postcount }} Posts
                     </InertiaLink>
-                    <InertiaLink preserve-scroll class="btn btn-xs btn-outline btn-accent"
+                    <InertiaLink preserve-scroll class="btn-link ml-2"
                         :href="route('user-profile', { id: profile.username })">
                         {{ profile.followings }} Follows
                     </InertiaLink>
-                    <InertiaLink preserve-scroll class="btn btn-xs btn-outline btn-primary"
+                    <InertiaLink preserve-scroll class="btn-link ml-2"
                         :href="route('user-profile', { id: profile.username })">
                         {{ profile.followers }} Followers
                     </InertiaLink>

@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.7",
         "overtrue/laravel-follow": "^5.0",
         "overtrue/laravel-like": "^5.0",
+        "pusher/pusher-php-server": "^7.0",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/image": "^2.2",
         "spatie/laravel-image-optimizer": "^1.7",

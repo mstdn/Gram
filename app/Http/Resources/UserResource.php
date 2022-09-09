@@ -15,10 +15,11 @@ class UserResource extends JsonResource
             'username'      =>  $this->username,
             'about'         =>  $this->about,
             'time'          =>  $this->created_at,
-            'avatar'        =>  $this->getProfilePhotoUrlAttribute(),
+            'picture'       =>  '/storage/' . $this->profile_photo_path,
+            'avatar'        =>  $this->resource->getProfilePhotoUrlAttribute(),
             'followers'     =>  $this->followers()->count(),
             'followings'    =>  $this->followings()->count(),
-            'posts'         =>  PostResource::collection($this->whenLoaded('posts')),
+            //'posts'         =>  PostResource::collection($this->whenLoaded('posts')),
             'postcount'     =>  $this->posts->count(),
             'is'            => [
                 'following'     =>  Auth::user() ? Auth::user()->isFollowing($this->resource) : null,

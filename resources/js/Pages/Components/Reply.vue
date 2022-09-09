@@ -1,10 +1,20 @@
 <template>
     <div class="py-8">
-        <ol class="relative border-l border-gray-200 dark:border-gray-700">
-            <li v-for="reply in post.data.replies" :key="reply.id" class="mb-10 ml-6">
+        <ol class="relative">
+            <li v-if="replies.total === 0">
+                <div class="justify-between items-center p-4 py-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
+                    <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
+                        No replies.
+                    </div>
+                </div>
+            </li>
+            <li v-for="reply in replies.data" :key="reply.id" class="mb-10 ml-6">
                 <span
                     class="flex absolute -left-3 justify-center items-center w-8 h-8 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-                    <img class="rounded-full" :src="reply.avatar" alt="{{ reply.username }}">
+                    <div class="avatar">
+                        <img class="w-10 h-10 rounded-full flex-shrink-0" :src="reply.avatar"
+                            alt="{{ reply.username }}">
+                    </div>
                 </span>
                 <div
                     class="justify-between items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
@@ -20,6 +30,6 @@
 </template>
 <script setup>
 let props = defineProps({
-    post: Object,
+    replies: Object,
 });
 </script>

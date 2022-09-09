@@ -61,6 +61,8 @@ class HandleInertiaRequests extends Middleware
 
             'filters' => $request->only(['search']),
 
+            'unreadNotificationsCount' => $request->user() ? $request->user()->unreadNotifications()->count() : null,
+
             /* 'posts'  => fn () => [
                 'posts' =>  PostResource::collection(Post::query()->with('user', 'category')->latest()
                     ->when($request->input('search'), function ($query, $search) {

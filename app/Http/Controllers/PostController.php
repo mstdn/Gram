@@ -7,6 +7,9 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\ReplyResource;
+use App\Models\Reply;
+use App\Notifications\LikeNotification;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
@@ -105,8 +108,14 @@ class PostController extends Controller
     public function show(Post $post, Request $request)
     {
         return Inertia::render('Post/Show', [
-            'post'  =>  PostResource::make($post),
-            'filters' => $request->only(['search'])
+            'post'      =>  PostResource::make($post),
+            'replies'   =>  ReplyResource::collection(
+                Reply::where('post_id', $post->id)
+                ->with('user')
+                ->oldest()
+                ->paginate()
+            ),
+            'filters'   => $request->only(['search'])
         ]);
     }
 
@@ -116,6 +125,7 @@ class PostController extends Controller
             auth()->user()->unlike($post);
         } else {
             auth()->user()->toggleLike($post);
+            $post->user->notify(new LikeNotification($post, auth()->user()));
         }
         return back();
     }

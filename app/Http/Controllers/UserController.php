@@ -7,6 +7,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Notifications\FollowNotification;
 
 class UserController extends Controller
 {
@@ -47,6 +48,7 @@ class UserController extends Controller
             auth()->user()->unfollow($user);
         } else {
             auth()->user()->toggleFollow($user);
+            $user->notify(new FollowNotification($user, auth()->user()));
         }
 
         return back();

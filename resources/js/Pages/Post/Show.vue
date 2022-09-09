@@ -5,6 +5,7 @@ import Reply from '../Components/Reply.vue';
 
 let props = defineProps({
     post: Object,
+    replies: Object,
 });
 
 const form = useForm();
@@ -152,7 +153,7 @@ function destroy(id) {
                                             <label class="modal-box relative bg-white text-gray-900 dark:text-white dark:bg-gray-900" for="">
                                                 <label for="repliesModal"
                                                     class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                                <Reply :post="post" />
+                                                <Reply :replies="replies" />
                                                 <div class="w-full p-4 md:pr-5">
                                                     <ReplyForm v-if="$page.props.auth.user !== null" :post="post" />
                                                 </div>

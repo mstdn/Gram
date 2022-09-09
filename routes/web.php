@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReplyController;
-use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +17,7 @@ Route::get('/community', [UserController::class, 'index'])->name('community');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/public', [PostController::class, 'public'])->name('public');
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications');
     Route::group(['prefix' => 'home'], function () {
         Route::get('/', [PostController::class, 'index'])->name('home');
         Route::middleware('optimizeImages')->group(function () {

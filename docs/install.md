@@ -19,7 +19,7 @@ Start with cloning the repo to your server:
 
 Install the composer dependencies:
 
-`cd goldfish && composer install`
+`cd gram && composer install`
 
 
 Copy the example .env and fillout your details like URL, database, email:

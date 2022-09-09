@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             'name'          =>  $this->user->name,
             'likes'         =>  $this->likers()->count(),
             'replycount'    =>  $this->replies->count(),
-            'replies'       =>  ReplyResource::collection($this->whenLoaded('replies')),
+            //'replies'       =>  ReplyResource::collection($this->whenLoaded('replies')),
             'can'           => [
                 'delete'        =>  Auth::user() ? Auth::user()->can('delete-post', $this->resource) : null,
                 'liked'         =>  Auth::user() ? Auth::user()->hasLiked($this->resource) : null
