@@ -94,7 +94,7 @@ function destroy(id) {
                             <button @click="showLess = false"></button> -->
 
 
-                            <div class="mt-auto">
+                            <div class="mt-auto mb-4">
                                 <div class="flex justify-between ml-2 mr-2">
                                     <div class="flex justify-start">
                                         <InertiaLink v-if="post.data.can.liked === false" preserveScroll method="post"
@@ -163,9 +163,9 @@ function destroy(id) {
                                 </div>
                             </div>
 
-                            <div class="w-full p-4 md:pr-5">
+                            <!-- <div class="w-full p-4 md:pr-5">
                                 <ReplyForm v-if="$page.props.auth.user !== null" :post="post" />
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>

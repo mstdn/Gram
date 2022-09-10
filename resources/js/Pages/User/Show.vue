@@ -137,7 +137,7 @@ let props = defineProps({
                                 <div class="px-4 mx-auto max-w-screen-xl">
                                     <div class="mx-auto max-w-screen-sm text-center p-10">
 
-                                        Soon.
+                                        Soon. meow.
 
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@ let props = defineProps({
                                 <div class="px-4 mx-auto max-w-screen-xl lg:px-6">
                                     <div class="mx-auto max-w-screen-sm text-center p-10">
 
-                                        Soon.
+                                        Soon. meow.
 
                                     </div>
                                 </div>

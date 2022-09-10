@@ -17,6 +17,7 @@ class PostResource extends JsonResource
             'file'          =>  '/storage/' . $this->file,    
             'category'      =>  $this->category->name,
             'category_id'   =>  $this->category->id,
+            'category_slug' =>  $this->category->slug,
             'avatar'        =>  $this->user->getProfilePhotoUrlAttribute(),
             'username'      =>  $this->user->username,
             'name'          =>  $this->user->name,

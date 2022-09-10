@@ -9,7 +9,7 @@
                 </svg>
                 <div>
                     <h3 class="font-bold">It's empty!</h3>
-                    <div class="text-xs">There are no posts here yet.</div>
+                    <div class="text-xs">There is nothing here yet...</div>
                 </div>
             </div>
             <div class="flex-none">
