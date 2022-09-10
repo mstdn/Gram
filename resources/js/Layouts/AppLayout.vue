@@ -30,7 +30,7 @@ const logout = () => {
                 class="sticky top-0 z-50 navbar bg-white dark:bg-gray-900 dark:border-b-[1px] dark:border-gray-800 border-b-[1px] border-gray-200">
                 <div class="navbar-start ">
                     <div class="dropdown">
-                        <label tabindex="0" class="btn btn-ghost lg:hidden">
+                        <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="#a7081a">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -158,13 +158,13 @@ const logout = () => {
                 <div class="navbar-end">
                     <PublicSearch :filters="$page.props.filters" />
 
-                    <InertiaLink href="/login" class="btn btn-ghost">
+                    <InertiaLink href="/login" class="btn btn-circle btn-ghost">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
                         </svg>
                     </InertiaLink>
-                    <InertiaLink href="/register" class="btn btn-ghost">
+                    <InertiaLink href="/register" class="btn btn-circle btn-ghost">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -181,7 +181,7 @@ const logout = () => {
                 <div class="navbar-start">
 
                     <div class="dropdown">
-                        <label tabindex="0" class="btn btn-ghost lg:hidden">
+                        <label tabindex="0" class="btn btn-ghost btn-circle lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                 stroke="#a7081a">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -212,6 +212,36 @@ const logout = () => {
                                     :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/community' }">
                                 Community
                                 </Link>
+                            </li>
+                            <li tabindex="0">
+                                <a class="justify-between">
+                                    More
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M9 18l6-6-6-6" />
+                                    </svg>
+                                </a>
+                                <ul class="p-2 bg-white dark:bg-gray-900 dark:text-white">
+                                    <li>
+                                        <Link href="/"
+                                            :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/about' }">
+                                        About
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/terms-of-service"
+                                            :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/terms-of-service' }">
+                                        Terms of Service
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/privacy-policy"
+                                            :class="{ 'bg-gray-100 dark:bg-gray-700': $page.url === '/privacy-policy' }">
+                                        Privacy Policy
+                                        </Link>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -328,7 +358,7 @@ const logout = () => {
                     </InertiaLink>
 
                     <div class="dropdown dropdown-left lg:hidden md:hidden">
-                        <label tabindex="0" class="btn btn-ghost">
+                        <label tabindex="0" class="btn btn-ghost btn-circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="#a7081a" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">

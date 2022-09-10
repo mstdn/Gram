@@ -17,7 +17,7 @@
                                 :href="route('user-profile', { id: notification.data.follower.username })">
                                 @{{ notification.data.follower.username }}
                             </InertiaLink>
-                            <span class="text-gray-800 dark:text-gray-300 ml-2">followed you</span>
+                            <span class="text-gray-600 dark:text-gray-300 ml-2">followed you</span>
                         </div>
                     </h2>
                     <div class="mt-4">
@@ -68,7 +68,7 @@
                                 :href="route('user-profile', { id: notification.data.follower.username })">
                                 @{{ notification.data.follower.username }}
                             </InertiaLink>
-                            <span class="text-gray-800 dark:text-gray-300 ml-2">liked your</span>
+                            <span class="text-gray-600 dark:text-gray-300 ml-2">liked your</span>
                             <InertiaLink class="hover:underline"
                                 :href="route('show-post', { id: notification.data.post.id })">
                                 post
@@ -122,7 +122,7 @@
                                 :href="route('user-profile', { id: notification.data.follower.username })">
                                 @{{ notification.data.follower.username }}
                             </InertiaLink>
-                            <span class="text-gray-800 dark:text-gray-300 ml-2">replied to your</span>
+                            <span class="text-gray-600 dark:text-gray-300 ml-2">replied to your</span>
                             <InertiaLink class="hover:underline"
                                 :href="route('show-post', { id: notification.data.post.id })">
                                 post

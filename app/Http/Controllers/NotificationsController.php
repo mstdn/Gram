@@ -14,7 +14,7 @@ class NotificationsController extends Controller
 
         $notifications = auth()->user()->notifications()
             ->latest()
-            ->paginate();
+            ->paginate(8);
 
         if ($request->wantsJson()) {
             return $notifications;

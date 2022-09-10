@@ -68,19 +68,19 @@ let props = defineProps({
                 </div>
                 <div class="flex justify-center mt-6">
                     <ul
-                        class="menu menu-vertical lg:menu-horizontal bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white rounded-box">
+                        class="menu menu-horizontal bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white rounded-box">
                         <li>
                             <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
                                 :active="route().current('user-profile', profile.data.username)">
                                 {{ profile.data.postcount }} Posts
                             </InertiaLink>
                         </li>
-                        <li>
+                        <!-- <li>
                             <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
                                 :active="route().current('user-profile', profile.data.username)">
                                 0 Boards
                             </InertiaLink>
-                        </li>
+                        </li> -->
                         <li>
                             <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
                                 :active="route().current('user-profile', profile.data.username)">
@@ -101,21 +101,20 @@ let props = defineProps({
         <div class="py-12">
             <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="overflow-hidden sm:rounded-lg">
-
                     <TabGroup>
-                        <TabList class="text-center flex space-x-1 bg-gray-200 dark:bg-gray-800 rounded-lg">
+                        <TabList class="text-center flex space-x-1 rounded-lg btn-group">
                             <Tab v-slot="{ selected }" as="template">
-                                <button :class="[selected ? 'btn btn-primary' : 'btn btn-primary btn-active']">
+                                <button :class="[selected ? 'btn btn-primary btn-sm' : 'btn btn-primary btn-active btn-sm']">
                                     Posts
                                 </button>
                             </Tab>
                             <Tab v-slot="{ selected }" as="template">
-                                <button :class="[selected ? 'btn btn-primary' : 'btn btn-primary btn-active']">
+                                <button :class="[selected ? 'btn btn-primary btn-sm' : 'btn btn-primary btn-active btn-sm']">
                                     Liked
                                 </button>
                             </Tab>
                             <Tab v-slot="{ selected }" as="template">
-                                <button :class="[selected ? 'btn btn-primary' : 'btn btn-primary btn-active']">
+                                <button :class="[selected ? 'btn btn-primary btn-sm' : 'btn btn-primary btn-active btn-sm']">
                                     Shared
                                 </button>
                             </Tab>
@@ -125,7 +124,7 @@ let props = defineProps({
 
                                 <Empty v-if="posts.meta.total === 0" class="columns-1 mt-20" />
 
-                                <div class="columns-1 md:columns-3 lg:columns-4">
+                                <div class="columns-1 md:columns-3 lg:columns-4 mt-6">
                                     <PostCard class="mb-4" v-for="post in posts.data" :key="post.id" :post="post" />
                                 </div>
 

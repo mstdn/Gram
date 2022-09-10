@@ -1,7 +1,7 @@
 <template>
     <div class="py-8">
         <ol class="relative">
-            <li v-if="replies.total === 0">
+            <li v-if="replies.meta.total === 0">
                 <div class="justify-between items-center p-4 py-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
                     <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
                         No replies.
