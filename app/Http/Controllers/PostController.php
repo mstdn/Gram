@@ -104,7 +104,7 @@ class PostController extends Controller
             'model_type'    =>  Post::class
         ]);
 
-        return redirect()->back();
+        return redirect(route('home'));
     }
 
     public function show(Post $post, Request $request)
