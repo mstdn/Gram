@@ -66,14 +66,14 @@
                             </InertiaLink>
                         </li> -->
                         <li>
-                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
-                                :active="route().current('user-profile', profile.data.username)">
+                            <InertiaLink preserve-scroll :href="route('follows', profile.data.username)"
+                                :active="route().current('follows', profile.data.username)">
                                 {{ profile.data.followings }} Following
                             </InertiaLink>
                         </li>
                         <li>
-                            <InertiaLink preserve-scroll :href="route('user-profile', profile.data.username)"
-                                :active="route().current('user-profile', profile.data.username)">
+                            <InertiaLink preserve-scroll :href="route('followers', profile.data.username)"
+                                :active="route().current('followers', profile.data.username)">
                                 {{ profile.data.followers }} Followers
                             </InertiaLink>
                         </li>

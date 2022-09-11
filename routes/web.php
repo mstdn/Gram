@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'landing'])->name('landing')->middleware('guest');
 Route::get('@{user:username}', [UserController::class, 'show'])->name('user-profile');
+Route::get('@{user:username}/follows', [UserController::class, 'follows'])->name('follows');
+Route::get('@{user:username}/followers', [UserController::class, 'followers'])->name('followers');
 Route::get('/p/{post:id}', [PostController::class, 'show'])->name('show-post');
 Route::get('/explore', [CategoryController::class, 'index'])->name('categories');
 Route::get('/explore/{category:slug}', [CategoryController::class, 'show'])->name('show-category');
