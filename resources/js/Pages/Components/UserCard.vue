@@ -52,11 +52,11 @@
                         {{ profile.postcount }} Posts
                     </InertiaLink>
                     <InertiaLink preserve-scroll class="btn-link ml-2"
-                        :href="route('user-profile', { id: profile.username })">
+                        :href="route('follows', { id: profile.username })">
                         {{ profile.followings }} Follows
                     </InertiaLink>
                     <InertiaLink preserve-scroll class="btn-link ml-2"
-                        :href="route('user-profile', { id: profile.username })">
+                        :href="route('followers', { id: profile.username })">
                         {{ profile.followers }} Followers
                     </InertiaLink>
                 </div>
