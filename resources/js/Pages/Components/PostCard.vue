@@ -1,8 +1,13 @@
 <template>
     <div>
-        <div class="filter hover:brightness-[80%]">
-            <img @click="openModal" class="rounded h-full w-full hover:" :src="post.file" />
+        <div class="h-96 carousel carousel-vertical rounded-box w-full">
+            <div v-for="(item, index) in post.media" :key="index" class="carousel-item">
+                <div class="filter hover:brightness-[80%]">
+                    <img @click="openModal" class="carousel-item h-full" :src="item.full_url" />
+                </div>
+            </div>
         </div>
+        <!-- <img @click="openModal" class="rounded h-full w-full hover:" :src="post.file" /> -->
         <TransitionRoot appear :show="isOpen" as="template">
             <Dialog as="div" @close="closeModal" class="relative z-50">
                 <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0"
@@ -26,28 +31,46 @@
                                             @{{ post.username }}
                                         </InertiaLink>
                                         <div class="m-1">・</div>
-                                        <InertiaLink class="ml-1 mt-1 hover:underline" :href="route('show-post', { id: post.id })">
+                                        <InertiaLink class="ml-1 mt-1 hover:underline"
+                                            :href="route('show-post', { id: post.id })">
                                             {{ post.time }}
                                         </InertiaLink>
                                     </div>
 
                                     <div class="flex justify-end">
-                                        <button type="button" class="btn btn-primary btn-sm" @click="closeModal">
-                                            Close
+                                        <button type="button" class="btn btn-ghost btn-sm btn-circle"
+                                            @click="closeModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="#a7081a" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                                            </svg>
                                         </button>
                                     </div>
                                 </DialogTitle>
                                 <div class="mt-4">
-                                    <InertiaLink :href="route('show-post', { id: post.id })">
+
+                                    <div class="carousel rounded-box w-full h-auto">
+                                        <div v-for="(item, index) in post.media" :key="index" class="carousel-item w-full h-full">
+                                            <img class="rounded-2xl object-cover h-full w-full max-h-[300px]" :src="item.full_url" />
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <InertiaLink :href="route('show-post', { id: post.id })">
                                         <img class="rounded-2xl object-fill h-full w-full" :src="post.file" alt="" />
-                                    </InertiaLink>
+                                    </InertiaLink> -->
+
                                 </div>
                                 <div class="mt-4 p-4">
-                                    <p class="text-gray-900 dark:text-white">{{ post.description }}</p>
+                                    <p class="text-gray-900 dark:text-white">
+                                        {{ post.description }}
+                                    </p>
                                 </div>
-
                                 <div class="mt-6">
-                                    <div class="divider"></div>
+                                    <div class="divider dark:border-gray-300"></div>
                                     <div class="flex justify-between">
                                         <div>
                                             <InertiaLink :href="`/explore/${post.category_slug}`" class="btn btn-sm">
@@ -58,7 +81,7 @@
                                             <div>
                                                 <InertiaLink v-if="post.can.liked === false" preserveScroll
                                                     method="post" as="button" type="button"
-                                                    class="btn btn-ghost btn-sm gap-2"
+                                                    class="btn btn-ghost btn-sm gap-2 text-gray-900 dark:text-white"
                                                     :href="route('like', { id: post.id })">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -72,7 +95,7 @@
                                                 </InertiaLink>
                                                 <InertiaLink v-if="post.can.liked === true" preserveScroll method="post"
                                                     as="button" type="button"
-                                                    class="btn btn-ghost btn-sm btn-block gap-2"
+                                                    class="btn btn-ghost btn-sm btn-block gap-2 text-gray-900 dark:text-white"
                                                     :href="route('like', { id: post.id })">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         viewBox="0 0 24 24" fill="#f8e71c" stroke="#f8e71c"
@@ -86,7 +109,7 @@
                                                 </InertiaLink>
                                                 <InertiaLink v-if="$page.props.auth.user === null"
                                                     :href="route('show-post', { id: post.id })"
-                                                    class="btn btn-ghost btn-sm btn-block gap-2">
+                                                    class="btn btn-ghost btn-sm btn-block gap-2 text-gray-900 dark:text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="1.5" stroke-linecap="round"
@@ -100,7 +123,8 @@
                                             </div>
                                             <div>
 
-                                                <button class="btn btn-ghost btn-sm btn-block gap-2">
+                                                <button
+                                                    class="btn btn-ghost btn-sm btn-block gap-2 text-gray-900 dark:text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         viewBox="0 0 24 24" fill="none" stroke="#a7081a"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

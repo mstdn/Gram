@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReplyController;
@@ -18,6 +19,7 @@ Route::get('/community', [UserController::class, 'index'])->name('community');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/public', [PostController::class, 'public'])->name('public');
     Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications');
+    Route::get('/upload', [PostController::class, 'create']);
     Route::group(['prefix' => 'home'], function () {
         Route::get('/', [PostController::class, 'index'])->name('home');
         Route::middleware('optimizeImages')->group(function () {
@@ -25,6 +27,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         });
         Route::delete('/{post}/delete', [PostController::class, 'destroy'])->name('post.destroy');
     });
+    Route::middleware('optimizeImages')->group(function () {
+        Route::post('/upload', [PostController::class, 'store']);
+        Route::post('/media', [MediaController::class, 'store'])->name('media.store');
+    });
+    Route::delete('/media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
     Route::post('/@{user:username}/follow', [UserController::class, 'follow'])->name('follow');
     Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('like');
     Route::post('/posts/{post}/reply', [ReplyController::class, 'store'])->name('reply');

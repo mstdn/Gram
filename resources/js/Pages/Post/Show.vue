@@ -28,9 +28,14 @@ function destroy(id) {
                 <div
                     class="grid grid-cols-1 sm:grid-cols-10 gap-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg min-h-[600px] max-h-[900px]">
                     <div class="col-span-7 bg-black rounded-lg lg:rounded-l-lg">
-                        <figure>
+                        <div class="carousel carousel-center w-full h-full">
+                            <div v-for="(item, index) in post.data.media" :key="index" class="carousel-item">
+                                <img class="object-contain w-full center max-h-[600px] rounded-t-lg lg:rounded-l-lg" :src="item.full_url" />
+                            </div>
+                        </div>
+                        <!-- <figure>
                             <img :src="post.data.file" class="object-contain w-full center max-h-[600px] rounded-t-lg lg:rounded-l-lg" />
-                        </figure>
+                        </figure> -->
                     </div>
                     <div class="col-span-7 md:col-span-3">
                         <div class="flex flex-col h-full">
@@ -94,9 +99,9 @@ function destroy(id) {
                             <button @click="showLess = false"></button> -->
 
 
-                            <div class="mt-auto mb-4">
-                                <div class="flex justify-between ml-2 mr-2">
-                                    <div class="flex justify-start">
+                            <div class="mt-auto mb-6">
+                                <div class="flex ml-2 mr-2">
+                                    <div class="flex">
                                         <InertiaLink v-if="post.data.can.liked === false" preserveScroll method="post"
                                             as="button" type="button" class="btn btn-ghost btn-sm gap-2"
                                             :href="route('like', { id: post.data.id })">
@@ -134,7 +139,7 @@ function destroy(id) {
                                             {{ post.data.likes }}
                                         </InertiaLink>
                                     </div>
-                                    <div class="flex justify-end mr-6">
+                                    <div class="flex ml-2">
                                         <!-- The button to open replies modal -->
                                         <label for="repliesModal" class="btn btn-ghost btn-sm modal-button gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -150,7 +155,9 @@ function destroy(id) {
                                         <!-- Replies modal -->
                                         <input type="checkbox" id="repliesModal" class="modal-toggle" />
                                         <label for="repliesModal" class="modal cursor-pointer">
-                                            <label class="modal-box relative bg-white text-gray-900 dark:text-white dark:bg-gray-900" for="">
+                                            <label
+                                                class="modal-box relative bg-white text-gray-900 dark:text-white dark:bg-gray-900"
+                                                for="">
                                                 <label for="repliesModal"
                                                     class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                                                 <Reply :replies="replies" />

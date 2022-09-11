@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelLike\Traits\Likeable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Post extends Model
 {
     use Likeable;
     use HasFactory;
-
-    /* protected $with = ['user', 'category']; */
 
     public function user() 
     {
@@ -26,5 +25,10 @@ class Post extends Model
     public function replies() 
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function media(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'model');
     }
 }

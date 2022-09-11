@@ -5,6 +5,7 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Policies\CategoryPolicy;
+use App\Policies\MediaPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\ReplyPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -34,5 +35,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-reply', [ReplyPolicy::class, 'destroy']);
         Gate::define('delete-category', [CategoryPolicy::class, 'destroy']);
         Gate::define('create-category', [CategoryPolicy::class, 'store']);
+        Gate::define('delete-media', [MediaPolicy::class, 'destroy']);
     }
 }

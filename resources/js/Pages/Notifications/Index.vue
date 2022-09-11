@@ -25,6 +25,10 @@ export default {
 
             if (pixelsFromBottom < 100) {
 
+                if(!this.userNotifications.next_page_url) {
+                    return;
+                }
+
                 axios.get(this.userNotifications.next_page_url).then(response => {
                     this.userNotifications = {
                         ...response.data,

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\ReplyResource;
+use App\Models\Media;
 use App\Models\Reply;
 use App\Notifications\LikeNotification;
 use Illuminate\Support\Facades\File;
@@ -43,8 +44,8 @@ class PostController extends Controller
                     $query->where('user_id', auth()->id())
                         ->orWhereIn('user_id', auth()->user()->followings->pluck('followable_id'));
                 })
-                    ->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
-                    ->with('user', 'replies', 'likers')
+                    //->select('id', 'description', 'file', 'category_id', 'user_id', 'created_at')
+                    ->with('user', 'replies', 'likers', 'media', 'category')
                     ->latest()
                     ->when($request->input('search'), function ($query, $search) {
                         $query->where('description', 'like', "%{$search}%");
@@ -74,35 +75,36 @@ class PostController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('Post/Create');
+    }
+
     public function store(Request $request)
     {
         $post = $request->validate([
             'description'   =>  'required|min:1|max:500',
-            'file'          =>  ['required', 'mimes:jpg,jpeg,png,gif', 'max:500048'],
             'category'      =>  ['required', Rule::exists('categories', 'id')],
+            'mediaIds.*'    =>  [
+                Rule::exists('media', 'id')
+                ->where(function($query) use ($request) {
+                    $query->where('user_id', $request->user()->id);
+                })
+            ]
         ]);
-
-        $post['user_id'] = auth()->id();
-
-        /* $image = $request->file('file');
-        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-     
-        $destinationPath = Storage::disk('public')
-        $img = Image::make($image->getRealPath());
-        $img->resize(1000, 600, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save('uploads/' .$input['imagename'], 80); */
-   
-        //$this->postImage->add($input);
 
         $post = Post::create([
-            'user_id'       =>  auth()->id(),
+            'user_id'       =>  $request->user()->id,
             'description'   =>  $request->description,
             'category_id'   =>  $request->category,
-            'file'          =>  $request->file->store('uploads/' . $post['user_id'] . '/' . 'images', 'public'),
         ]);
 
-        return Redirect::route('home');
+        Media::find($request->mediaIds)->each->update([
+            'model_id'      =>  $post->id,
+            'model_type'    =>  Post::class
+        ]);
+
+        return redirect()->back();
     }
 
     public function show(Post $post, Request $request)

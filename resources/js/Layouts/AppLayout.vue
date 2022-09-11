@@ -8,6 +8,7 @@ import PublicSearch from '../Pages/Components/PublicSearch.vue';
 import Mobile from '../Pages/Components/Mobile.vue';
 import MobileSearch from '../Pages/Components/MobileSearch.vue';
 import Footer from '../Pages/Components/Footer.vue';
+import UploadModal from '../Pages/Components/UploadModal.vue';
 
 defineProps({
     title: String,
@@ -342,7 +343,16 @@ const logout = () => {
                 <div class="navbar-end">
                     <Search :filters="$page.props.filters" />
 
-                    <Compose />
+                    <!-- <Compose /> -->
+
+                    <!-- <UploadModal /> -->
+
+                    <InertiaLink href="/upload" class="btn btn-circle btn-ghost md:mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#a7081a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3" />
+                        </svg>
+                    </InertiaLink>
 
                     <InertiaLink :href="route('notifications')" class="btn btn-ghost btn-circle md:mr-2">
                         <div class="indicator">
@@ -424,7 +434,7 @@ const logout = () => {
             </main>
 
             <Mobile class="pt-10 z-10" v-if="$page.props.auth.user !== null" />
-            <!-- <Footer class="mt-auto hidden md:flex" /> -->
+            <Footer class="mt-auto hidden md:flex" />
         </div>
     </div>
 </template>
