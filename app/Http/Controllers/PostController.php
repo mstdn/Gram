@@ -85,7 +85,7 @@ class PostController extends Controller
         $post = $request->validate([
             'description'   =>  'required|min:1|max:500',
             'category'      =>  ['required', Rule::exists('categories', 'id')],
-            'mediaIds.*'    =>  [
+            'mediaIds.*'    =>  ['required',
                 Rule::exists('media', 'id')
                 ->where(function($query) use ($request) {
                     $query->where('user_id', $request->user()->id);

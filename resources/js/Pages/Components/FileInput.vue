@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="file" ref="picker" accept="image/*" multiple @change="change" class="opacity-0" />
+        <input type="file" ref="picker" accept="image/*" multiple @change="change" class="opacity-0" required />
         <button @click="browse" type="button"
             class="flex flex-col w-full h-32 border-4 border-primary border-dashed hover:bg-gray-300 hover:border-secondary dark:hover:bg-gray-900">
             <div class="flex flex-col items-center justify-center pt-7">
