@@ -85,19 +85,22 @@ class PostController extends Controller
         $post = $request->validate([
             'description'   =>  'required|min:1|max:500',
             'category'      =>  ['required', Rule::exists('categories', 'id')],
-            'mediaIds.*'    =>  ['required',
+            'mediaIds.*'    =>  [
+                'required',
                 Rule::exists('media', 'id')
-                ->where(function($query) use ($request) {
-                    $query->where('user_id', $request->user()->id);
-                })
+                    ->where(function ($query) use ($request) {
+                        $query->where('user_id', $request->user()->id);
+                    })
             ]
         ]);
 
-        $post = Post::create([
-            'user_id'       =>  $request->user()->id,
-            'description'   =>  $request->description,
-            'category_id'   =>  $request->category,
-        ]);
+        if ($request->mediaIds) {
+            $post = Post::create([
+                'user_id'       =>  $request->user()->id,
+                'description'   =>  $request->description,
+                'category_id'   =>  $request->category,
+            ]);
+        }
 
         Media::find($request->mediaIds)->each->update([
             'model_id'      =>  $post->id,
@@ -113,9 +116,9 @@ class PostController extends Controller
             'post'      =>  PostResource::make($post),
             'replies'   =>  ReplyResource::collection(
                 Reply::where('post_id', $post->id)
-                ->with('user')
-                ->oldest()
-                ->paginate()
+                    ->with('user')
+                    ->oldest()
+                    ->paginate()
             ),
             'filters'   => $request->only(['search'])
         ]);

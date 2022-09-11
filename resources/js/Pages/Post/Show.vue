@@ -28,8 +28,8 @@ function destroy(id) {
                 <div
                     class="grid grid-cols-1 sm:grid-cols-10 gap-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg min-h-[600px] max-h-[900px]">
                     <div class="col-span-7 bg-black rounded-lg lg:rounded-l-lg">
-                        <div class="carousel carousel-center w-full h-full">
-                            <div v-for="(item, index) in post.data.media" :key="index" class="carousel-item">
+                        <div class="carousel w-full">
+                            <div v-for="(item, index) in post.data.media" :key="index" class="carousel-item w-full">
                                 <img class="object-contain w-full center max-h-[600px] rounded-t-lg lg:rounded-l-lg" :src="item.full_url" />
                             </div>
                         </div>
