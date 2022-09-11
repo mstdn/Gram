@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="carousel carousel-vertical rounded-box w-full">
+        <!-- <div class="carousel carousel-vertical rounded-box w-full">
             <div v-for="(item, index) in post.media" :key="index" class="carousel-item">
                 <div class="filter hover:brightness-[80%]">
                     <img @click="openModal" class="carousel-item rounded-2xl object-cover h-full w-full" :src="item.full_url" />
                 </div>
             </div>
-        </div>
-        <!-- <img @click="openModal" class="rounded h-full w-full hover:" :src="post.file" /> -->
+        </div> -->
+        <img @click="openModal" class="rounded h-full w-full hover:" :src="post.media[0].full_url" />
         <TransitionRoot appear :show="isOpen" as="template">
             <Dialog as="div" @close="closeModal" class="relative z-50">
                 <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0"
