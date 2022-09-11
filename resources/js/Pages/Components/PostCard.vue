@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="h-96 carousel carousel-vertical rounded-box w-full">
+        <div class="carousel carousel-vertical rounded-box w-full">
             <div v-for="(item, index) in post.media" :key="index" class="carousel-item">
                 <div class="filter hover:brightness-[80%]">
-                    <img @click="openModal" class="carousel-item h-full" :src="item.full_url" />
+                    <img @click="openModal" class="carousel-item rounded-2xl object-cover h-full w-full" :src="item.full_url" />
                 </div>
             </div>
         </div>
