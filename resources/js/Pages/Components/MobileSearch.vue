@@ -1,5 +1,5 @@
 <template>
-        <input v-model="search" type="text" placeholder="Search for cool stuff"
+        <input v-model="search" type="search" placeholder="Search for cool stuff"
             class="flex input input-bordered rounded-full input-sm h-10 w-full mr-4 bg-white text-gray-900 dark:bg-gray-800 dark:text-white" />
 </template>
 <script setup>

@@ -1,22 +1,38 @@
-<script setup>
-import { Inertia } from '@inertiajs/inertia';
+<script>
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import JetBanner from '@/Components/Banner.vue';
 import Search from '../Pages/Components/Search.vue';
-import Compose from '../Pages/Components/Compose.vue';
 import PublicSearch from '../Pages/Components/PublicSearch.vue';
 import Mobile from '../Pages/Components/Mobile.vue';
 import MobileSearch from '../Pages/Components/MobileSearch.vue';
 import Footer from '../Pages/Components/Footer.vue';
-import UploadModal from '../Pages/Components/UploadModal.vue';
+import NotiCheck from '../Pages/Components/NotiCheck.vue';
 
-defineProps({
-    title: String,
-});
+export default {
+    components: {
+    Head,
+    Link,
+    JetBanner,
+    Search,
+    PublicSearch,
+    Mobile,
+    MobileSearch,
+    Footer,
+    NotiCheck
+},
+    props: {
+        title: String
+    },
+    created() {
+        if(this.$page.props.auth.user !== null) {
+            window.Echo.private(`App.Models.User.${this.$page.props.user.id}`)
+            .notification((notification) => {
+                console.log(notification);
+            });
+        }
+    }
+}
 
-const logout = () => {
-    Inertia.post(route('logout'));
-};
 </script>
 
 <template>
@@ -25,6 +41,7 @@ const logout = () => {
         <Head :title="title" />
 
         <JetBanner />
+        <!-- <NotiCheck v-if="$page.props.auth.user !== null" /> -->
 
         <div class="bg-white dark:bg-gray-900">
             <div v-if="$page.props.auth.user === null"
@@ -248,7 +265,12 @@ const logout = () => {
                     </div>
 
                     <InertiaLink href="/" class="btn btn-ghost normal-case text-xl text-primary">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11.5" cy="8.5" r="5.5" />
+                            <path d="M11.5 14v7" />
+                        </svg>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-700 ml-2">
                             {{ $page.props.appName }}
                         </span>
                     </InertiaLink>
@@ -433,7 +455,7 @@ const logout = () => {
                 <slot />
             </main>
 
-            <Mobile class="pt-10 z-10" v-if="$page.props.auth.user !== null" />
+            <Mobile class="pt-10 z-10" />
             <Footer class="mt-auto hidden md:flex" />
         </div>
     </div>
